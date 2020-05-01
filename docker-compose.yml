@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  postgres:
+    container_name: papeles-keycloak-postgres
+    image: postgres:11
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: keycloak
+    networks:
+      - papeles
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  keycloak:
+    container_name: papeles-keycloak
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8099:8080
+    environment:
+      KEYCLOAK_HOSTNAME: papeles-dev-machine
+      KEYCLOAK_HTTP_PORT: 8099
+      KEYCLOAK_LOGLEVEL: INFO
+      ROOT_LOGLEVEL: INFO
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_HOST: keycloak-postgres
+      DB_USER: keycloak
+      DB_PASSWORD: password
+    networks:
+      - papeles
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  papeles:
+    external:
+      name: papeles
