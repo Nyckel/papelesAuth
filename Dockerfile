@@ -4,7 +4,7 @@ MAINTAINER Mathis Ouarnier "mathis.ouarnier@gmail.com"
 
 WORKDIR /usr/src/app
 
-FROM jboss/keycloak:7.0.0
+FROM jboss/keycloak:10.0.0
 EXPOSE 8080
 
 USER root

@@ -27,7 +27,8 @@ services:
       ROOT_LOGLEVEL: INFO
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
-      DB_HOST: keycloak-postgres
+      DB_ADDR: papeles-keycloak-postgres
+      DB_DATABASE: keycloak
       DB_USER: keycloak
       DB_PASSWORD: password
     networks:
