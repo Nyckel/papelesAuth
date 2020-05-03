@@ -7,5 +7,3 @@ Keycloak instance for **Papeles de casa** (in a docker image)
 
 ## Development
 `docker-compose up` Start keycloak
-# papelesAuth
-# papelesAuth
