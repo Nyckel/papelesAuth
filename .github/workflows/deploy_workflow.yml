@@ -21,6 +21,6 @@ jobs:
           extraFile: ".ansible/variables_staging.yml"
           extraVars: "-e keycloak_user=${{ secrets.keycloak_user }} -e keycloak_password=${{ secrets.keycloak_password }}
           -e keycloak_db_host=${{ secrets.keycloak_db_host }} -e keycloak_db_database=${{ secrets.keycloak_db_database }}
-           keycloak_db_port=${{ secrets.keycloak_db_port }} keycloak_db_user=${{ secrets.keycloak_db_user }}
-           keycloak_db_password=${{ secrets.keycloak_db_password }} keycloak_db_maintenance_db=${{ secrets.keycloak_db_maintenance_db }}"
+          -e keycloak_db_port=${{ secrets.keycloak_db_port }} -e keycloak_db_user=${{ secrets.keycloak_db_user }}
+           -e keycloak_db_password=${{ secrets.keycloak_db_password }} -e keycloak_db_maintenance_db=${{ secrets.keycloak_db_maintenance_db }}"
           verbosity: "vv"
