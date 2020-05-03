@@ -18,6 +18,7 @@ jobs:
         with:
           playbookName: ".ansible/playbooks/playbook.yml"
           inventoryFile: ".ansible/inventory/inventory.cfg"
+          keyFile: "~/.ssh/id_rsa"
           extraFile: ".ansible/variables_staging.yml"
           extraVars: "-e keycloak_user=${{ secrets.keycloak_user }} -e keycloak_password=${{ secrets.keycloak_password }}
           -e keycloak_db_host=${{ secrets.keycloak_db_host }} -e keycloak_db_database=${{ secrets.keycloak_db_database }}
