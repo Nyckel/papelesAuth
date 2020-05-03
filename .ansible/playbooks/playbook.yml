@@ -1,5 +1,5 @@
 ---
-- hosts: papeles-auth
+- hosts: papelesauth
   become: yes
   tasks:
     - name: pull from repo
