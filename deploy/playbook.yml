@@ -1,0 +1,59 @@
+---
+- hosts: papeles-auth
+  become: yes
+  tasks:
+    - name: pull from repo
+      git:
+        repo: 'https://github.com/Nyckel/papelesAuth.git'
+        accept_hostkey: yes
+        update: yes
+        clone: no
+        force: yes
+
+    - name: Start PostgreSQL container # To be removed when db will be on separate host
+      docker_container:
+        name: "postgres"
+        image: "postgres:11"
+        env:
+          POSTGRES_USER: "{{ keycloak.db.user }}"
+          POSTGRES_PASSWORD: "{{ keycloak.db.password }}"
+          POSTGRES_DB: "{{ keycloak.db.database }}"
+        ports:
+          - "{{ keycloak.db.port }}:5432"
+
+    - name: Install PostgreSQL plugin dependency
+      apt: name=python3-psycopg2 update_cache=yes state=installed
+
+    - name: Create database
+      postgresql_db:
+        login_host: "{{ keycloak.db.host }}"
+        login_user: "{{ keycloak.db.user }}"
+        login_password: "{{ keycloak.db.password }}"
+        name: "{{ keycloak.db.database }}"
+        port: "{{ keycloak.db.port }}"
+        maintenance_db: "{{ keycloak.db.maintenance_db }}"
+
+    - name: Start Keycloak
+      docker_container:
+        name: "keycloak"
+        image: "./papelesAuth/Dockerfile"
+        state: started
+        restart_policy: always
+        log_driver: "json-file"
+        log_options:
+          max-size: "20m"
+          max-file: "10"
+        ports:
+          - "8090:8080"
+        env:
+          KEYCLOAK_USER: "{{ keycloak.user }}"
+          KEYCLOAK_PASSWORD: "{{ keycloak.password }}"
+          PROXY_ADDRESS_FORWARDING: true
+          KEYCLOAK_LOGLEVEL: "{{ keycloak.loglevel }}"
+          ROOT_LOGLEVEL: "{{ keycloak.root_loglevel }}"
+          DB_VENDOR: "{{ keycloak.db.vendor }}"
+          DB_ADDR: "{{ keycloak.db.host }}:{{keycloak.db.port}}"
+          DB_DATABASE: "{{ keycloak.db.database }}"
+          #          DB_PORT: "{{ keycloak.db.port }}"
+          DB_USER: "{{ keycloak.db.user }}"
+          DB_PASSWORD: "{{ keycloak.db.password }}"

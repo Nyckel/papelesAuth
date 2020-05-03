@@ -1,0 +1,5 @@
+keycloak:
+  loglevel: INFO
+  root_loglevel: INFO
+  db:
+    vendor: postgres
