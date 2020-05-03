@@ -15,8 +15,9 @@ jobs:
       - name: Execute playbook
         uses: saubermacherag/ansible-playbook-docker-action@v1.3
         with:
-          playbookName: "deploy/playbook.yml"
-          inventoryFile: "deploy/inventory.cfg"
+          playbookName: "playbook.yml"
+          inventoryFile: "inventory.cfg"
+          extraFile: ".ansible/variables_staging.yml"
           extraVars: "-e keycloak.user=${{ secrets.keycloak_user }} -e keycloak.password=${{ secrets.keycloak_password }}
           -e keycloak.db.host=${{ secrets.keycloak_db_host }} -e keycloak.db.database=${{ secrets.keycloak_db_database }}
            keycloak.db.port=${{ secrets.keycloak_db_port }} keycloak.db.user=${{ secrets.keycloak_db_user }}
