@@ -23,4 +23,4 @@ jobs:
           -e keycloak_db_host=${{ secrets.keycloak_db_host }} -e keycloak_db_database=${{ secrets.keycloak_db_database }}
           -e keycloak_db_port=${{ secrets.keycloak_db_port }} -e keycloak_db_user=${{ secrets.keycloak_db_user }}
            -e keycloak_db_password=${{ secrets.keycloak_db_password }} -e keycloak_db_maintenance_db=${{ secrets.keycloak_db_maintenance_db }}"
-          verbosity: "vv"
+          verbosity: "vvvv"
