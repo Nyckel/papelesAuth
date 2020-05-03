@@ -15,23 +15,23 @@
         name: "postgres"
         image: "postgres:11"
         env:
-          POSTGRES_USER: "{{ keycloak.db.user }}"
-          POSTGRES_PASSWORD: "{{ keycloak.db.password }}"
-          POSTGRES_DB: "{{ keycloak.db.database }}"
+          POSTGRES_USER: "{{ keycloak_db_user }}"
+          POSTGRES_PASSWORD: "{{ keycloak_db_password }}"
+          POSTGRES_DB: "{{ keycloak_db_database }}"
         ports:
-          - "{{ keycloak.db.port }}:5432"
+          - "{{ keycloak_db_port }}:5432"
 
     - name: Install PostgreSQL plugin dependency
       apt: name=python3-psycopg2 update_cache=yes state=installed
 
     - name: Create database
       postgresql_db:
-        login_host: "{{ keycloak.db.host }}"
-        login_user: "{{ keycloak.db.user }}"
-        login_password: "{{ keycloak.db.password }}"
-        name: "{{ keycloak.db.database }}"
-        port: "{{ keycloak.db.port }}"
-        maintenance_db: "{{ keycloak.db.maintenance_db }}"
+        login_host: "{{ keycloak_db_host }}"
+        login_user: "{{ keycloak_db_user }}"
+        login_password: "{{ keycloak_db_password }}"
+        name: "{{ keycloak_db_database }}"
+        port: "{{ keycloak_db_port }}"
+        maintenance_db: "{{ keycloak_db_maintenance_db }}"
 
     - name: Start Keycloak
       docker_container:
@@ -46,14 +46,14 @@
         ports:
           - "8090:8080"
         env:
-          KEYCLOAK_USER: "{{ keycloak.user }}"
-          KEYCLOAK_PASSWORD: "{{ keycloak.password }}"
+          KEYCLOAK_USER: "{{ keycloak_user }}"
+          KEYCLOAK_PASSWORD: "{{ keycloak_password }}"
           PROXY_ADDRESS_FORWARDING: true
           KEYCLOAK_LOGLEVEL: "{{ keycloak.loglevel }}"
           ROOT_LOGLEVEL: "{{ keycloak.root_loglevel }}"
           DB_VENDOR: "{{ keycloak.db.vendor }}"
-          DB_ADDR: "{{ keycloak.db.host }}:{{keycloak.db.port}}"
-          DB_DATABASE: "{{ keycloak.db.database }}"
+          DB_ADDR: "{{ keycloak_db_host }}:{{keycloak_db_port}}"
+          DB_DATABASE: "{{ keycloak_db_database }}"
           #          DB_PORT: "{{ keycloak.db.port }}"
-          DB_USER: "{{ keycloak.db.user }}"
-          DB_PASSWORD: "{{ keycloak.db.password }}"
+          DB_USER: "{{ keycloak_db_user }}"
+          DB_PASSWORD: "{{ keycloak_db_password }}"

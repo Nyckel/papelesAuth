@@ -19,8 +19,8 @@ jobs:
           playbookName: ".ansible/playbooks/playbook.yml"
           inventoryFile: ".ansible/inventory/inventory.cfg"
           extraFile: ".ansible/variables_staging.yml"
-          extraVars: "-e keycloak.user=${{ secrets.keycloak_user }} -e keycloak.password=${{ secrets.keycloak_password }}
-          -e keycloak.db.host=${{ secrets.keycloak_db_host }} -e keycloak.db.database=${{ secrets.keycloak_db_database }}
-           keycloak.db.port=${{ secrets.keycloak_db_port }} keycloak.db.user=${{ secrets.keycloak_db_user }}
-           keycloak.db.password=${{ secrets.keycloak_db_password }} keycloak.db.maintenance_db=${{ secrets.keycloak_db_maintenance_db }}"
+          extraVars: "-e keycloak_user=${{ secrets.keycloak_user }} -e keycloak_password=${{ secrets.keycloak_password }}
+          -e keycloak_db_host=${{ secrets.keycloak_db_host }} -e keycloak_db_database=${{ secrets.keycloak_db_database }}
+           keycloak_db_port=${{ secrets.keycloak_db_port }} keycloak_db_user=${{ secrets.keycloak_db_user }}
+           keycloak_db_password=${{ secrets.keycloak_db_password }} keycloak_db_maintenance_db=${{ secrets.keycloak_db_maintenance_db }}"
           verbosity: "vv"
