@@ -683,7 +683,7 @@
       "clientId": "papeles-mobile",
       "rootUrl": "",
       "adminUrl": "",
-      "baseUrl": "fr.nyckel.papeles.papelesmobile:/login",
+      "baseUrl": "",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
