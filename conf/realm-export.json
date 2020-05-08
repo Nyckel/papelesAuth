@@ -683,14 +683,14 @@
       "clientId": "papeles-mobile",
       "rootUrl": "",
       "adminUrl": "",
-      "baseUrl": "",
+      "baseUrl": "https://papelesdecasa.fr:443",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "fr.nyckel.papeles.papelesmobile:/*"
+        "*"
       ],
       "webOrigins": [
         "*"
